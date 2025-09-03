@@ -1,4 +1,10 @@
 *.aux
 *.pdf
 */.DS_Store
-
+.DS_Store
+.lof
+.lot
+.toc
+*/.lof
+*/.lot
+*/.toc

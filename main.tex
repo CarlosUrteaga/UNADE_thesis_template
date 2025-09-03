@@ -1,0 +1,108 @@
+% Tesis UNADE CLASS -- version 0.1
+% Clase para las tesis del UNADE
+% 
+% 2025 09 02 Carlos Urteaga carlos(dot)urteaga (at) outlook (dot) com
+% LICENSE: Creative Commons SA-BY 3.0
+% Este documento presenta un ejemplo de uso de la plantilla
+% El estudiante es libre de modificar este archivo a su gusto
+
+\documentclass{tesisUNADE}
+
+\usepackage[utf8]{inputenc}
+\usepackage{type1cm,lettrine}
+\usepackage{longtable}
+ \usepackage{eso-pic}
+ \usepackage{xcolor}
+ \usepackage[margin=1in]{geometry} % left margin defines where the stripe will sit
+ \usepackage{lipsum}
+\usepackage[toc,style=altlistgroup,hyperfirst=false]{glossaries}
+\usepackage{lscape}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{amsopn}
+
+
+\usetikzlibrary{babel}
+
+% Glossary
+\newcommand\nomenclature[2]{#1 & #2 \\}
+
+\title{Nombre del Proyecto}
+\degree{Nombre del Programa}
+\author{Nombre}
+\renewcommand{\student}{Alumno} %change the value to Alumne if is desired
+
+% \setadvisorlabel{Directora}     % o "Director(a)"
+% \setcoadvisorlabel{Codirectora} % o "Co-Director(a)"
+\advisor{Nombre del Director}
+%\coadvisor{Nombre del Codirector}
+\year{2025}
+
+
+\definecolor{myyellow}{RGB}{255,204,0}
+\definecolor{myblue}{RGB}{0,51,153}
+
+%%%%%%%%
+\begin{document}
+
+\pagenumbering{gobble}
+\maketitle
+
+\begin{abstract}{spanish}
+\lipsum[1]
+
+\end{abstract}
+Palabras clave: Entre 3 y 5 palabras. No poner en cursiva. 
+\begin{abstract}{english}
+\lipsum[1]
+\end{abstract}
+Keywords: 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Dedicatoria}
+\include{Agradecimientos}
+
+\selectlanguage{spanish}
+
+\pagenumbering{roman}
+\renewcommand{\contentsname}{Tabla de contenido}
+\tableofcontents
+\setcounter{page}{1}
+\renewcommand{\listfigurename}{Tabla de figuras}
+\renewcommand{\listtablename}{Tabla de tablas}
+\listoftables
+\listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\include{glosario}
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONTENT  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{Cap_00/Cap_00}
+\include{Cap_01/Cap_01}
+\include{Cap_02/Cap_02}
+\include{Cap_03/Cap_03}
+\include{Cap_04/Cap_04}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%%
+% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+%\renewcommand\bibname{Referencias Bibliográficas}
+%\cleardoublepage  
+%\markboth{\bibname}{\bibname}
+\bibliography{bibtex}
+\bibliographystyle{ieeetr}
+\end{document}

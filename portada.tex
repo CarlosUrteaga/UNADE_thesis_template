@@ -1,0 +1,82 @@
+% =======================
+% portada.tex  (Cover)
+% =======================
+\begin{titlepage}
+	\thispagestyle{empty}
+	
+	% -----------------------
+	% Stripe parameters (edit)
+	% -----------------------
+	\newlength{\LeftStripeWidth} \setlength{\LeftStripeWidth}{10pt}  % stripe thickness
+	\newlength{\TopSpace}        \setlength{\TopSpace}{15mm}         % white space at top before yellow
+	\newlength{\YellowHeight}    \setlength{\YellowHeight}{190mm}    % yellow segment height
+	\newlength{\GapHeight}       \setlength{\GapHeight}{4mm}         % white gap between yellow and blue
+	\newlength{\BlueHeight}      \setlength{\BlueHeight}{40mm}       % blue segment height
+	\newlength{\BottomSpace}     \setlength{\BottomSpace}{20mm}      % white space at bottom after blue
+	% Get the left margin offset from geometry
+	% --- Auto-detect left text margin ---
+	\newlength{\TextLeft}
+	\setlength{\TextLeft}{\dimexpr\oddsidemargin+0.3in\relax}
+
+	% --- Draw the vertical segmented stripe ONLY on this page (foreground) ---
+	\AddToShipoutPictureFG*{%
+	\begin{tikzpicture}[remember picture,overlay]
+		% Anchor at the text block's top-left corner
+		\coordinate (TNW) at ([xshift=\TextLeft]current page.north west);
+
+		% Yellow segment (use TNW, not current page.north west)
+		\fill[myyellow]
+		([yshift=-\TopSpace]TNW)
+		rectangle ([xshift=\LeftStripeWidth,
+					yshift=-\TopSpace-\YellowHeight-\BottomSpace]TNW);
+
+		% Blue segment (also with TNW)
+		\fill[myblue]
+		([yshift=-\TopSpace-\YellowHeight-\GapHeight-\BottomSpace]TNW)
+		rectangle ++(\LeftStripeWidth,-\BlueHeight);
+	\end{tikzpicture}%
+	}
+
+	
+	% -------------  portada content -------------
+	% If your class defines macros like \university, \faculty, \program, \title, \author, \advisor, \date,
+	% they will render here. Otherwise, put literal text.
+	
+	% (Optional) top-right logo (adjust width/path)
+	% \begin{flushright}
+	%   \includegraphics[width=28mm]{figs/university-logo}%
+	% \end{flushright}
+	\vspace*{8mm}
+
+	\vspace{-70pt}
+	\begin{center}
+
+		\begin{tabular}{c}
+		\end{tabular}\\
+		\vspace{30pt}
+		\includegraphics[scale=.3]{UNADELogo.jpg}\\
+		\vspace{25pt}
+		\textbf{\huge \thedegree}\\
+		\vspace{20pt}
+		% {\large \thesubtitle}\\
+		\vspace{20 pt}
+		\textbf{\huge \thetitle } \\
+		\vspace{35pt}
+		{\Large \textbf \student} \\
+		\vspace{20pt}
+		{\Large \theauthor} \\
+		\vspace{5pt}
+		%PRESENTA \\
+		%\vspace{5pt}
+		%{\Large \theauthor} \\
+		\vfill
+	\end{center}
+	\printadvisors	\\
+		\vspace{5pt}
+
+	\ \raggedleft{
+		\begin{tabular}{rr}
+			Tlalpan, Ciudad de México  & \theyear
+		\end{tabular}}
+	\end{titlepage}
+	

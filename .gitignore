@@ -13,3 +13,11 @@
 */*.synctex.gz
 *.synctex.gz
 main.synctex.gz
+*.lof
+*.lot
+*.toc
+*.log
+main.bbl
+main.blg
+main.fdb_latexmk
+main.fls

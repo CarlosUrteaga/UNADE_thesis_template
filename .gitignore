@@ -1,3 +1,6 @@
+*.bcf
+*.run.xml
+*.bbl-*
 *.aux
 *.pdf
 */.DS_Store

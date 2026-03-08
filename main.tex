@@ -20,10 +20,11 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{amsopn}
-
+\usepackage[style=apa, backend=biber]{biblatex}
 
 \usetikzlibrary{babel}
-
+\usepackage[spanish]{babel} % Para que diga "Referencias" y no "References"
+\addbibresource{bibtex.bib}
 % Glossary
 \newcommand\nomenclature[2]{#1 & #2 \\}
 
@@ -103,6 +104,5 @@ Keywords:
 %\renewcommand\bibname{Referencias Bibliográficas}
 %\cleardoublepage  
 %\markboth{\bibname}{\bibname}
-\bibliography{bibtex}
-\bibliographystyle{ieeetr}
+\printbibliography
 \end{document}

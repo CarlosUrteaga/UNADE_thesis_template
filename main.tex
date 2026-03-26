@@ -8,23 +8,42 @@
 
 \documentclass{tesisUNADE}
 
-\usepackage[utf8]{inputenc}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+\fi
 \usepackage{type1cm,lettrine}
+\usepackage{csquotes}
 \usepackage{longtable}
+\usepackage{array}
 \usepackage{eso-pic}
 \usepackage{xcolor}
-\usepackage[left=1.in, right=1in, top=1.6in, bottom=1in]{geometry}
 \usepackage{lipsum}
 \usepackage[toc,style=altlistgroup,hyperfirst=false]{glossaries}
 \usepackage{lscape}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{amsopn}
-\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage[
+  style=apa,
+  backend=biber,
+  sortcites=true,
+  doi=true,
+  url=true,
+  isbn=false,
+  eprint=false
+]{biblatex}
 
 \usetikzlibrary{babel}
 \usepackage[spanish]{babel} % Para que diga "Referencias" y no "References"
+\DeclareLanguageMapping{spanish}{spanish-apa}
 \addbibresource{bibtex.bib}
+\AtBeginBibliography{%
+  \setstretch{2.45}%
+  \setlength{\bibitemsep}{0pt}%
+  \setlength{\itemsep}{0pt}%
+  \setlength{\bibhang}{1.5em}%
+}
 % Glossary
 \newcommand\nomenclature[2]{#1 & #2 \\}
 
@@ -48,6 +67,7 @@
 
 \pagenumbering{gobble}
 \maketitle
+\DisableWatermark
 
 \begin{abstract}{spanish}
 \lipsum[1]
@@ -63,18 +83,25 @@ Keywords:
 % ABSTRACT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pagenumbering{roman}
+\setcounter{page}{1}
 \include{Dedicatoria}
 \include{Agradecimientos}
 
 \selectlanguage{spanish}
 
-\pagenumbering{roman}
+\pagestyle{unadefront}
+\makeatletter
+\let\ps@plain\ps@unadefront
+\makeatother
 \renewcommand{\contentsname}{Tabla de contenido}
+\clearpage
 \tableofcontents
-\setcounter{page}{1}
 \renewcommand{\listfigurename}{Tabla de figuras}
 \renewcommand{\listtablename}{Tabla de tablas}
+\clearpage
 \listoftables
+\clearpage
 \listoffigures
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,6 +113,10 @@ Keywords:
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
+\pagestyle{unademain}
+\makeatletter
+\let\ps@plain\ps@unademain
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONTENT  
@@ -101,8 +132,10 @@ Keywords:
 % BIBLIOGRAPHY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-%\renewcommand\bibname{Referencias Bibliográficas}
-%\cleardoublepage  
-%\markboth{\bibname}{\bibname}
+\defbibheading{bibliography}[\bibname]{%
+  \chapter*{#1}%
+  \thispagestyle{unademain}%
+  \addcontentsline{toc}{chapter}{#1}}
+\renewcommand{\bibname}{Referencias}
 \printbibliography
 \end{document}

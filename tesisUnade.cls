@@ -21,9 +21,14 @@
 \LoadClass{report}
 
 %Paquetes requeridos
+\RequirePackage{iftex}
 \RequirePackage{graphicx}
 \RequirePackage{amsopn}
 \RequirePackage{fancyhdr}
+\RequirePackage{geometry}
+\RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{tocloft}
 
 \RequirePackage{tikz}
 \RequirePackage{verbatim}
@@ -32,6 +37,26 @@
 \PassOptionsToPackage{english}{babel}
 \PassOptionsToPackage{spanish,es-tabla,es-nodecimaldot}{babel}
 \RequirePackage{babel}
+
+% Aproxima el documento base de Word: carta, margenes de 1 in y Times.
+\geometry{letterpaper,margin=1in}
+\newlength{\UNADEHeaderLogoHeight}
+\setlength{\UNADEHeaderLogoHeight}{20mm}
+\setlength{\headheight}{\dimexpr\UNADEHeaderLogoHeight+4pt\relax}
+\setlength{\headsep}{12pt}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{mathptmx}
+\else
+  \RequirePackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \IfFontExistsTF{Times New Roman}{%
+    \setmainfont{Times New Roman}%
+  }{%
+    % Fallback portable para Linux/CI/Overleaf sin fuentes Microsoft.
+    \RequirePackage{newtxtext}%
+  }
+\fi
 
 %Requerimos las definiciones adicionales
 \RequirePackage{macros}
@@ -62,21 +87,87 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% Espaciados %%%%%%%%%%%%%%%%%%%%%%%%%%
 \parindent 0pt
 \parskip 1ex
-\renewcommand{\baselinestretch}{1.33}
+\setstretch{2}
 
 %%%%%%%%%%%%%%%%% Usar numeros romanos en las subsecciones %%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand\thesubsubsection{\Roman{subsubsection}}
 \setcounter{secnumdepth}{3}
 
-%%%%%%%%%%%%%%%%% Encabezados %%%%%%%%%%%%%%%%%%%%%%%
-%\pagestyle{fancy}
-%\lhead{}
-%\rhead{\nouppercase{\textsc{\leftmark}}}
-%\renewcommand{\headrulewidth}{1pt}
-%\renewcommand{\footrulewidth}{1pt}
-%\hrule width \hsize \kern 1mm \hrule width \hsize height 2pt 
+%%%%%%%%%%%%%%%%%%%%%%%%%% Titulos y preliminares %%%%%%%%%%%%%%%%%%%%%%%%%%
+% El .docx usa Titulo 1 centrado y en negritas; los niveles siguientes son
+% progresivamente mas compactos y alineados a la izquierda.
+\titleformat{\chapter}[block]
+  {\normalfont\bfseries\centering\fontsize{14}{16}\selectfont}
+  {\thechapter.}
+  {0.5em}
+  {}
+\titlespacing*{\chapter}{0pt}{-1.2cm}{1.2cm}
 
-\renewcommand{\chaptermark}[1]{\markboth{\textsc \ #1}{}}
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{13}{15}\selectfont}
+  {\thesection}
+  {0.75em}
+  {}
+\titlespacing*{\section}{0pt}{1.5ex plus .5ex minus .2ex}{0.75ex}
+
+\titleformat{\subsection}
+  {\normalfont\bfseries\itshape\fontsize{12}{14}\selectfont}
+  {\thesubsection}
+  {0.75em}
+  {}
+\titlespacing*{\subsection}{0pt}{1.25ex plus .5ex minus .2ex}{0.5ex}
+
+\titleformat{\subsubsection}
+  {\normalfont\bfseries\itshape}
+  {\thesubsubsection}
+  {0.75em}
+  {}
+\titlespacing*{\subsubsection}{0pt}{1ex plus .5ex minus .2ex}{0.5ex}
+
+\renewcommand{\cfttoctitlefont}{\hfill\bfseries\fontsize{14}{16}\selectfont}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftlottitlefont}{\hfill\bfseries\fontsize{14}{16}\selectfont}
+\renewcommand{\cftafterlottitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\bfseries\fontsize{14}{16}\selectfont}
+\renewcommand{\cftafterloftitle}{\hfill}
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{1.5em}
+\setlength{\cftbeforelottitleskip}{0pt}
+\setlength{\cftafterlottitleskip}{1.5em}
+\setlength{\cftbeforeloftitleskip}{0pt}
+\setlength{\cftafterloftitleskip}{1.5em}
+\setlength{\cftbeforechapskip}{0.2em}
+\setlength{\cftbeforesecskip}{0.1em}
+\setlength{\cftchapindent}{0pt}
+\setlength{\cftsecindent}{1.25em}
+\setlength{\cftsubsecindent}{2.5em}
+\setlength{\cftchapnumwidth}{2.2em}
+\setlength{\cftsecnumwidth}{2.8em}
+\setlength{\cftsubsecnumwidth}{3.3em}
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftdotsep}{1.5}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+%%%%%%%%%%%%%%%%% Encabezados %%%%%%%%%%%%%%%%%%%%%%%
+\fancypagestyle{unadefront}{
+  \fancyhf{}
+  \fancyhead[R]{\fontsize{10}{12}\selectfont \thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{unademain}{
+  \fancyhf{}
+  \fancyhead[L]{\raisebox{-4mm}[0pt][0pt]{\includegraphics[height=\UNADEHeaderLogoHeight]{\UNADE@wmfile}}}
+  \fancyhead[R]{\fontsize{10}{12}\selectfont \thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
 \renewcommand\p@subsubsection{\thesubsection.}
 
 
@@ -91,7 +182,7 @@
 \newcommand\theadvisor{\@advisor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Definiciones de co-asesor (opcional) %%%%%%%%%%%%%%%%%
-\newcommand\@coadvisor{}                          % vacío por defecto = no se imprime
+\let\@coadvisor\@empty                           % vacío por defecto = no se imprime
 \newcommand\coadvisor[1]{\renewcommand\@coadvisor{#1}}
 \newcommand\thecoadvisor{\@coadvisor}
 
@@ -104,7 +195,7 @@
 % Rutina para imprimir 1 o 2 líneas según exista co-asesor
 \newcommand{\printadvisors}{%
   \noindent \advisorlabel: \theadvisor%
-  \ifx\@coadvisor\@empty\relax
+  \if\relax\detokenize\expandafter{\@coadvisor}\relax
     % nada: sólo hay un asesor
   \else
     \\[5pt]\coadvisorlabel: \thecoadvisor%

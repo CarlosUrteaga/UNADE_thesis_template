@@ -16,3 +16,19 @@ to better match the `.docx`.
 
 The template is configured for APA author-year citations with `biblatex` + `biber`.
 Use `\textcite{...}` for narrative citations and `\parencite{...}` for parenthetical citations.
+
+The template also supports a bilingual front matter setup through a single switch in
+`main.tex`:
+
+```tex
+\thesislanguage{spanish}
+```
+
+or
+
+```tex
+\thesislanguage{english}
+```
+
+This controls labels such as the table of contents, list of tables, list of figures,
+and bibliography headings automatically through `babel`.

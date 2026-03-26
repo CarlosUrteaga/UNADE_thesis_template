@@ -38,6 +38,25 @@
 \PassOptionsToPackage{spanish,es-tabla,es-nodecimaldot}{babel}
 \RequirePackage{babel}
 
+% Idioma principal de la tesis; por defecto se mantiene espanol.
+\newcommand{\UNADE@thesislanguage}{spanish}
+\newcommand{\thesislanguage}[1]{\renewcommand{\UNADE@thesislanguage}{#1}}
+\newcommand{\applythesislanguage}{\selectlanguage{\UNADE@thesislanguage}}
+
+\addto\captionsspanish{%
+  \renewcommand{\contentsname}{Tabla de contenido}%
+  \renewcommand{\listfigurename}{Tabla de figuras}%
+  \renewcommand{\listtablename}{Tabla de tablas}%
+  \renewcommand{\bibname}{Referencias}%
+}
+
+\addto\captionsenglish{%
+  \renewcommand{\contentsname}{Table of contents}%
+  \renewcommand{\listfigurename}{List of figures}%
+  \renewcommand{\listtablename}{List of tables}%
+  \renewcommand{\bibname}{References}%
+}
+
 % Aproxima el documento base de Word: carta, margenes de 1 in y Times.
 \geometry{letterpaper,margin=1in}
 \newlength{\UNADEHeaderLogoHeight}

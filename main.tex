@@ -47,6 +47,8 @@
 % Glossary
 \newcommand\nomenclature[2]{#1 & #2 \\}
 
+\thesislanguage{spanish} % change to english for an English thesis
+
 \title{Nombre del Proyecto}
 \degree{Nombre del Programa}
 \author{Nombre}
@@ -88,17 +90,14 @@ Keywords:
 \include{Dedicatoria}
 \include{Agradecimientos}
 
-\selectlanguage{spanish}
+\applythesislanguage
 
 \pagestyle{unadefront}
 \makeatletter
 \let\ps@plain\ps@unadefront
 \makeatother
-\renewcommand{\contentsname}{Tabla de contenido}
 \clearpage
 \tableofcontents
-\renewcommand{\listfigurename}{Tabla de figuras}
-\renewcommand{\listtablename}{Tabla de tablas}
 \clearpage
 \listoftables
 \clearpage
@@ -136,6 +135,5 @@ Keywords:
   \chapter*{#1}%
   \thispagestyle{unademain}%
   \addcontentsline{toc}{chapter}{#1}}
-\renewcommand{\bibname}{Referencias}
 \printbibliography
 \end{document}

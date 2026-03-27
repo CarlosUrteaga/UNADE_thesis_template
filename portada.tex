@@ -7,16 +7,19 @@
 	% -----------------------
 	% Stripe parameters (edit)
 	% -----------------------
-	\newlength{\LeftStripeWidth} \setlength{\LeftStripeWidth}{10pt}  % stripe thickness
-	\newlength{\TopSpace}        \setlength{\TopSpace}{15mm}         % white space at top before yellow
-	\newlength{\YellowHeight}    \setlength{\YellowHeight}{230mm}    % yellow segment height
-	\newlength{\GapHeight}       \setlength{\GapHeight}{4mm}         % white gap between yellow and blue
-	\newlength{\BlueHeight}      \setlength{\BlueHeight}{6mm}       % blue segment height
-	\newlength{\BottomSpace}     \setlength{\BottomSpace}{20mm}      % white space at bottom after blue
+	\newlength{\LeftStripeWidth} \setlength{\LeftStripeWidth}{15.5pt}
+	\newlength{\TopSpace}        \setlength{\TopSpace}{14mm}
+	\newlength{\YellowHeight}    \setlength{\YellowHeight}{247mm}
+	\newlength{\GapHeight}       \setlength{\GapHeight}{1.6mm}
+	\newlength{\BlueHeight}      \setlength{\BlueHeight}{6.3mm}
+	\newlength{\BottomSpace}     \setlength{\BottomSpace}{0mm}
+	\newlength{\CoverTextLeft}   \setlength{\CoverTextLeft}{0mm}
+	\newlength{\CoverTopSpace}   \setlength{\CoverTopSpace}{18mm}
+	\newlength{\CoverBottomSpace}\setlength{\CoverBottomSpace}{14mm}
 	% Get the left margin offset from geometry
 	% --- Auto-detect left text margin ---
 	\newlength{\TextLeft}
-	\setlength{\TextLeft}{\dimexpr\oddsidemargin+0.3in\relax}
+	\setlength{\TextLeft}{\dimexpr\oddsidemargin+1in\relax} %.3 in antes
 
 	% --- Draw the vertical segmented stripe ONLY on this page (foreground) ---
 	\AddToShipoutPictureFG*{%
@@ -37,46 +40,29 @@
 	\end{tikzpicture}%
 	}
 
-	
-	% -------------  portada content -------------
-	% If your class defines macros like \university, \faculty, \program, \title, \author, \advisor, \date,
-	% they will render here. Otherwise, put literal text.
-	
-	% (Optional) top-right logo (adjust width/path)
-	% \begin{flushright}
-	%   \includegraphics[width=28mm]{figs/university-logo}%
-	% \end{flushright}
-	\vspace*{8mm}
-
-	\vspace{-70pt}
+	\vspace*{\CoverTopSpace}
 	\begin{center}
-
-		\begin{tabular}{c}
-		\end{tabular}\\
 		\vspace{30pt}
 		\includegraphics[scale=.3]{UNADELogo.jpg}\\
 		\vspace{25pt}
-		\textbf{\huge \thedegree}\\
+		\parbox{0.78\textwidth}{\centering\textbf{\huge \thedegree}}\\
 		\vspace{20pt}
-		% {\large \thesubtitle}\\
-		\vspace{20 pt}
-		\textbf{\huge \thetitle } \\
+		\parbox{0.82\textwidth}{\centering\textbf{\huge \thetitle}}\\
 		\vspace{35pt}
-		{\Large \textbf \student} \\
+		{\Large \textbf{\student}}\\
 		\vspace{20pt}
-		{\Large \theauthor} \\
+		{\Large \theauthor}\\
 		\vspace{5pt}
-		%PRESENTA \\
-		%\vspace{5pt}
-		%{\Large \theauthor} \\
 		\vfill
 	\end{center}
-	\printadvisors	\\
-		\vspace{5pt}
 
-	\ \raggedleft{
-		\begin{tabular}{rr}
-			Tlalpan, Ciudad de México  & \theyear
-		\end{tabular}}
+	\noindent\hspace*{18mm}%
+	\begin{minipage}{\dimexpr\textwidth-18mm\relax}
+		{\fontsize{12}{14}\selectfont \printadvisors\par}
+		\vspace{7mm}
+		\begin{flushright}
+			{\fontsize{12}{14}\selectfont Tlalpan, Ciudad de México \hspace{12mm} \theyear}
+		\end{flushright}
+	\end{minipage}
 	\end{titlepage}
 	

@@ -3,7 +3,19 @@
 
 \chapter{Información sobre las referencias}\label{Cap_05}
 
-start using \textbackslash textcite and \textbackslash parencite, the biblatex equivalents of natbib's \textbackslash citet and \textbackslash citep commands
-referencia https://tex.stackexchange.com/questions/679826/how-to-use-apa7-referencing
-start using biber instead of bibtex to create the formatted bibliography
-\textcite{unade2025} otra cita \parencite{10.1007/978-3-032-17933-3_25}
+Esta plantilla está configurada para citas APA autor-año con \texttt{biblatex} y \texttt{biber}.
+
+Usa \textbackslash textcite para la cita narrativa. Ejemplo: \textcite{unade2025} presenta la información institucional.
+
+Usa \textbackslash parencite para la cita parentética. Ejemplo: las contribuciones recientes en agentes pueden citarse así \parencite{urteaga2026agentcards}.
+
+Para generar la bibliografía correctamente, compila con \texttt{biber} entre corridas de LaTeX.
+
+\lipsum[1-10] % Generates paragraphs 1 and 2 of Lorem Ipsum
+
+\nocite{lamport1994latex}
+\nocite{knuth1984texbook}
+\nocite{apa2020manual}
+\nocite{blei2003lda}
+\nocite{vaswani2017attention}
+\nocite{hevner2004designscience}

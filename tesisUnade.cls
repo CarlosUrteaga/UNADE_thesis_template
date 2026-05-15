@@ -173,6 +173,14 @@
 %%%%%%%%%%%%%%%%% Encabezados %%%%%%%%%%%%%%%%%%%%%%%
 \fancypagestyle{unadefront}{
   \fancyhf{}
+  \fancyhead[L]{\raisebox{-4mm}[0pt][0pt]{\includegraphics[height=\UNADEHeaderLogoHeight]{\UNADE@wmfile}}}
+  \fancyhead[R]{\fontsize{10}{12}\selectfont \thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{unadefrontnologo}{
+  \fancyhf{}
   \fancyhead[R]{\fontsize{10}{12}\selectfont \thepage}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
@@ -185,6 +193,16 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
+
+\newcommand{\EnableDedicatoriaLogo}{\gdef\UNADE@dedicatoriapagestyle{unadefront}}
+\newcommand{\DisableDedicatoriaLogo}{\gdef\UNADE@dedicatoriapagestyle{unadefrontnologo}}
+\newcommand{\ApplyDedicatoriaPageStyle}{\thispagestyle{\UNADE@dedicatoriapagestyle}}
+\EnableDedicatoriaLogo
+
+\newcommand{\EnableAgradecimientosLogo}{\gdef\UNADE@agradecimientospagestyle{unadefront}}
+\newcommand{\DisableAgradecimientosLogo}{\gdef\UNADE@agradecimientospagestyle{unadefrontnologo}}
+\newcommand{\ApplyAgradecimientosPageStyle}{\thispagestyle{\UNADE@agradecimientospagestyle}}
+\EnableAgradecimientosLogo
 
 \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
 \renewcommand\p@subsubsection{\thesubsection.}
@@ -256,7 +274,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% Resumen(es) %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \AtBeginDocument{\@ifpackageloaded{babel}{%
 	\renewenvironment{abstract}[1]{%
-		\thispagestyle{empty}\bigskip%
+		\thispagestyle{unadefront}\bigskip%
 		\begin{center}\begin{otherlanguage}{#1}\bf\abstractname\end{otherlanguage}\end{center}
 	}{}
 }{\ClassWarning{tesisUNADE} {Babel package was not loaded.}}}

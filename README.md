@@ -32,3 +32,21 @@ or
 
 This controls labels such as the table of contents, list of tables, list of figures,
 and bibliography headings automatically through `babel`.
+
+Front-matter pages use the same header logo as chapter pages by default. You can
+enable or disable the logo independently for `Dedicatoria` and `Agradecimientos`
+from `main.tex`:
+
+```tex
+% \DisableDedicatoriaLogo
+\DisableAgradecimientosLogo
+```
+
+Available commands:
+
+- `\EnableDedicatoriaLogo`
+- `\DisableDedicatoriaLogo`
+- `\EnableAgradecimientosLogo`
+- `\DisableAgradecimientosLogo`
+
+If no command is set, both pages show the logo by default.
